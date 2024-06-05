@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,8 +11,8 @@
 typedef struct {
     int id;
     char nom[NAME_LENGTH];
-    char date[11]; // Format : AAAA-MM-JJ
-    char heure[6]; // Format : HH:MM
+    char date[11];
+    char heure[6];
 } RendezVous;
 
 typedef struct {
@@ -25,49 +24,49 @@ typedef struct {
 
 RendezVous rendezVous[MAX_RENDEZ_VOUS];
 Contact contacts[MAX_CONTACTS];
-int nombreRendezVous = 0;
-int nombreContacts = 0;
+int rendezVousCount = 0;
+int contactCount = 0;
 
 void ajouterRendezVous() {
-    if (nombreRendezVous >= MAX_RENDEZ_VOUS) {
+    if (rendezVousCount >= MAX_RENDEZ_VOUS) {
         printf("Impossible d'ajouter plus de rendez-vous. Maximum atteint.\n");
         return;
     }
 
     RendezVous nouveauRendezVous;
-    nouveauRendezVous.id = nombreRendezVous + 1;
-    printf("Entrez le nom : ");
+    nouveauRendezVous.id = rendezVousCount + 1;
+    printf("Entrez le nom: ");
     scanf("%s", nouveauRendezVous.nom);
-    printf("Entrez la date (AAAA-MM-JJ) : ");
+    printf("Entrez la date (AAAA-MM-JJ): ");
     scanf("%s", nouveauRendezVous.date);
-    printf("Entrez l'heure (HH:MM) : ");
+    printf("Entrez l'heure (HH:MM): ");
     scanf("%s", nouveauRendezVous.heure);
 
-    rendezVous[nombreRendezVous] = nouveauRendezVous;
-    nombreRendezVous++;
-    printf("Rendez-vous ajouté avec succès !\n");
+    rendezVous[rendezVousCount] = nouveauRendezVous;
+    rendezVousCount++;
+    printf("Rendez-vous ajouté avec succès!\n");
 }
 
 void afficherRendezVous() {
-    if (nombreRendezVous == 0) {
+    if (rendezVousCount == 0) {
         printf("Aucun rendez-vous à afficher.\n");
         return;
     }
 
-    printf("Rendez-vous :\n");
-    for (int i = 0; i < nombreRendezVous; i++) {
-        printf("ID : %d, Nom : %s, Date : %s, Heure : %s\n",
+    printf("Rendez-vous:\n");
+    for (int i = 0; i < rendezVousCount; i++) {
+        printf("ID: %d, Nom: %s, Date: %s, Heure: %s\n",
                rendezVous[i].id, rendezVous[i].nom, rendezVous[i].date, rendezVous[i].heure);
     }
 }
 
 void supprimerRendezVous() {
     int id;
-    printf("Entrez l'ID du rendez-vous à supprimer : ");
+    printf("Entrez l'ID du rendez-vous à supprimer: ");
     scanf("%d", &id);
 
     int index = -1;
-    for (int i = 0; i < nombreRendezVous; i++) {
+    for (int i = 0; i < rendezVousCount; i++) {
         if (rendezVous[i].id == id) {
             index = i;
             break;
@@ -75,57 +74,57 @@ void supprimerRendezVous() {
     }
 
     if (index == -1) {
-        printf("Rendez-vous avec l'ID %d introuvable.\n", id);
+        printf("Rendez-vous avec l'ID %d non trouvé.\n", id);
         return;
     }
 
-    for (int i = index; i < nombreRendezVous - 1; i++) {
+    for (int i = index; i < rendezVousCount - 1; i++) {
         rendezVous[i] = rendezVous[i + 1];
     }
-    nombreRendezVous--;
-    printf("Rendez-vous supprimé avec succès !\n");
+    rendezVousCount--;
+    printf("Rendez-vous supprimé avec succès!\n");
 }
 
 void ajouterContact() {
-    if (nombreContacts >= MAX_CONTACTS) {
+    if (contactCount >= MAX_CONTACTS) {
         printf("Impossible d'ajouter plus de contacts. Maximum atteint.\n");
         return;
     }
 
     Contact nouveauContact;
-    nouveauContact.id = nombreContacts + 1;
-    printf("Entrez le nom : ");
+    nouveauContact.id = contactCount + 1;
+    printf("Entrez le nom: ");
     scanf("%s", nouveauContact.nom);
-    printf("Entrez le téléphone : ");
+    printf("Entrez le téléphone: ");
     scanf("%s", nouveauContact.telephone);
-    printf("Entrez l'email : ");
+    printf("Entrez l'email: ");
     scanf("%s", nouveauContact.email);
 
-    contacts[nombreContacts] = nouveauContact;
-    nombreContacts++;
-    printf("Contact ajouté avec succès !\n");
+    contacts[contactCount] = nouveauContact;
+    contactCount++;
+    printf("Contact ajouté avec succès!\n");
 }
 
 void afficherContacts() {
-    if (nombreContacts == 0) {
+    if (contactCount == 0) {
         printf("Aucun contact à afficher.\n");
         return;
     }
 
-    printf("Contacts :\n");
-    for (int i = 0; i < nombreContacts; i++) {
-        printf("ID : %d, Nom : %s, Téléphone : %s, Email : %s\n",
+    printf("Contacts:\n");
+    for (int i = 0; i < contactCount; i++) {
+        printf("ID: %d, Nom: %s, Téléphone: %s, Email: %s\n",
                contacts[i].id, contacts[i].nom, contacts[i].telephone, contacts[i].email);
     }
 }
 
 void supprimerContact() {
     int id;
-    printf("Entrez l'ID du contact à supprimer : ");
+    printf("Entrez l'ID du contact à supprimer: ");
     scanf("%d", &id);
 
     int index = -1;
-    for (int i = 0; i < nombreContacts; i++) {
+    for (int i = 0; i < contactCount; i++) {
         if (contacts[i].id == id) {
             index = i;
             break;
@@ -133,31 +132,34 @@ void supprimerContact() {
     }
 
     if (index == -1) {
-        printf("Contact avec l'ID %d introuvable.\n", id);
+        printf("Contact avec l'ID %d non trouvé.\n", id);
         return;
     }
 
-    for (int i = index; i < nombreContacts - 1; i++) {
+    for (int i = index; i < contactCount - 1; i++) {
         contacts[i] = contacts[i + 1];
     }
-    nombreContacts--;
-    printf("Contact supprimé avec succès !\n");
+    contactCount--;
+    printf("Contact supprimé avec succès!\n");
 }
 
 int main() {
     int choix;
 
     while (1) {
-        printf("\nGestion des Rendez-vous\n");
-        printf("1. Ajouter un Rendez-vous\n");
-        printf("2. Afficher les Rendez-vous\n");
-        printf("3. Supprimer un Rendez-vous\n");
-        printf("4. Ajouter un Contact\n");
-        printf("5. Afficher les Contacts\n");
-        printf("6. Supprimer un Contact\n");
+        system("clear");
+        printf("Système de Gestion Hôtelière\n");
+        printf("1. Ajouter Rendez-vous\n");
+        printf("2. Afficher Rendez-vous\n");
+        printf("3. Supprimer Rendez-vous\n");
+        printf("4. Ajouter Contact\n");
+        printf("5. Afficher Contacts\n");
+        printf("6. Supprimer Contact\n");
         printf("7. Quitter\n");
-        printf("Entrez votre choix : ");
+        printf("Entrez votre choix: ");
         scanf("%d", &choix);
+        fflush(stdin);
+
         switch (choix) {
             case 1:
                 ajouterRendezVous();
@@ -182,10 +184,11 @@ int main() {
             default:
                 printf("Choix invalide. Veuillez réessayer.\n");
         }
+
+        printf("Appuyez sur Entrée pour continuer...");
+        getchar();
+        getchar();
     }
 
     return 0;
 }
-```
-
-
