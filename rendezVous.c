@@ -158,7 +158,7 @@ int main() {
         printf("7. Quitter\n");
         printf("Entrez votre choix: ");
         scanf("%d", &choix);
-        fflush(stdin);
+        fflush(stdin);  // Pour vider le tampon d'entrée
 
         switch (choix) {
             case 1:
@@ -186,7 +186,7 @@ int main() {
         }
 
         printf("Appuyez sur Entrée pour continuer...");
-        getchar();
+        getchar(); // Pour attendre l'entrée de l'utilisateur
         getchar();
     }
 
