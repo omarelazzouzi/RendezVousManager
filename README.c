@@ -188,4 +188,4 @@ int main() {
 }
 ```
 
-J'ai traduit tous les mots clés et les messages en français.
+
